@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<mujoco model="paddle_turtle_body">
+    <!-- global defaults -->
+    <compiler angle="degree" coordinate="local"/>
+    <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4"/>
+
+    <default>
+        <geom condim="3" contype="1" conaffinity="1" density="400"
+              friction="0.03 0.5 0.5" margin="0.01" rgba="0.3 0.6 0.3 1"/>
+        <joint armature="1e-5" damping="1" limited="true"/>
+    </default>
+
+    <worldbody>
+        <body name="turtle" pos="0 0 0.08">
+            <joint name="root_free" type="free"/>
+
+            <!-- shell -->
+            <geom name="shell" type="box"
+                  size="0.2 0.12 0.06"
+                  rgba="0.2 0.5 0.2 1"/>
+
+            <!-- front‑left flipper: upper arm -->
+            <body name="flipper_L_upper" pos="0.10 0.15 0.01">
+                <joint name="shoulder_L" type="hinge"
+                       axis="0 0 1" range="0 170"/>
+                <geom name="flipper_L_upper_geom" type="capsule"
+                      fromto="0 0 0  0.3 0 0" size="0.04"
+                      rgba="0.2 0.4 0.7 1"/>
+
+                <!-- front‑left flipper: forearm -->
+                <body name="flipper_L_fore" pos="0.3 0 0">
+                    <joint name="elbow_L" type="hinge"
+                           axis="0 0 1" range="0 90"/>
+                    <geom name="flipper_L_fore_geom" type="capsule"
+                          fromto="0 0 0  0.3 0 0" size="0.035"
+                          rgba="0.2 0.4 0.8 1"/>
+                </body>
+            </body>
+
+            <!-- front‑right flipper: upper arm -->
+            <body name="flipper_R_upper" pos="0.10 -0.15 0.01">
+                <joint name="shoulder_R" type="hinge"
+                       axis="0 0 -1" range="0 170"/>
+                <geom name="flipper_R_upper_geom" type="capsule"
+                      fromto="0 0 0  0.3 0 0" size="0.04"
+                      rgba="0.2 0.4 0.7 1"/>
+
+                <!-- front‑right flipper: forearm -->
+                <body name="flipper_R_fore" pos="0.3 0 0">
+                    <joint name="elbow_R" type="hinge"
+                           axis="0 0 -1" range="0 90"/>
+                    <geom name="flipper_R_fore_geom" type="capsule"
+                          fromto="0 0 0  0.3 0 0" size="0.035"
+                          rgba="0.2 0.4 0.8 1"/>
+                </body>
+            </body>
+
+            <!-- reference point -->
+            <site name="shell_center" pos="0 0 0.08" size="0.01"/>
+        </body>
+
+        <camera name="follow" mode="trackcom"
+                pos="0 -2 0.5" xyaxes="1 0 0 0 0 1"/>
+    </worldbody>
+
+    <actuator>
+        <motor name="motor_shoulder_L" joint="shoulder_L"
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+        <motor name="motor_elbow_L" joint="elbow_L"
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+
+        <motor name="motor_shoulder_R" joint="shoulder_R"
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+        <motor name="motor_elbow_R" joint="elbow_R"
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+    </actuator>
+
+    <sensor>
+        <accelerometer site="shell_center"/>
+        <gyro site="shell_center"/>
+    </sensor>
+</mujoco>

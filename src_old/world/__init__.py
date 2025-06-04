@@ -2,14 +2,14 @@ from gymnasium.envs.registration import register
 
 
 register(
-    id="Turtle",
-    entry_point="Turtle.xml",
+    id="PassiveWalker-v0",
+    entry_point="src.world.envs.PassiveWalkerGym:PassiveWalkerEnv",
     max_episode_steps=1000,
 )
 
 
 register(
-    id="TurtleSlider",
+    id="Ant_custom",
     entry_point="src.world.envs.AntCustomGym:AntCustomEnv",
     max_episode_steps=1000,
 )
