@@ -17,7 +17,7 @@
     <!-- Ground plane: solid light-blue -->
     <geom name="ground" type="plane" pos="0 0 0"
           size="100 100 0.5"          
-          rgba="0.5 0.5 1 1"/>    <!-- light blue -->
+          rgba="0.5 0.5 1 0.6"/>    <!-- light blue -->
 
     <!-- Two light-red poles (radius 0.05 m, half-height 0.5 m) -->
     <!-- Left pole centre at (-0.5, 0, 0.5) -->

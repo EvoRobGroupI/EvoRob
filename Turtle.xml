@@ -5,8 +5,10 @@
     <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4"/>
 
     <default>
-        <geom condim="3" contype="1" conaffinity="1" density="400"
-              friction="0.03 0.5 0.5" margin="0.01" rgba="0.3 0.6 0.3 1"/>
+        <geom condim="3" contype="1" conaffinity="1" density="200"
+              solref="0.001 1" solimp="0.7 0.7 0.001"
+              friction="0.03 0.5 0.5" margin="0.02" rgba="0.3 0.6 0.3 1"/>
+              
         <joint armature="1e-5" damping="1" limited="true"/>
     </default>
 
@@ -17,6 +19,7 @@
             <!-- shell -->
             <geom name="shell" type="box"
                   size="0.2 0.12 0.06"
+                  density="1200"
                   rgba="0.2 0.5 0.2 1"/>
 
             <!-- front‑left flipper: upper arm -->
@@ -24,15 +27,15 @@
                 <joint name="shoulder_L" type="hinge"
                        axis="0 0 1" range="0 170"/>
                 <geom name="flipper_L_upper_geom" type="capsule"
-                      fromto="0 0 0  0.3 0 0" size="0.04"
+                      fromto="0 0 0  0.2 0 0" size="0.04"
                       rgba="0.2 0.4 0.7 1"/>
 
                 <!-- front‑left flipper: forearm -->
-                <body name="flipper_L_fore" pos="0.3 0 0">
+                <body name="flipper_L_fore" pos="0.2 0 0">
                     <joint name="elbow_L" type="hinge"
-                           axis="0 0 1" range="0 90"/>
+                           axis="0 0 1" range="0 80"/>
                     <geom name="flipper_L_fore_geom" type="capsule"
-                          fromto="0 0 0  0.3 0 0" size="0.035"
+                          fromto="0 0 0  0.2 0 0" size="0.035"
                           rgba="0.2 0.4 0.8 1"/>
                 </body>
             </body>
@@ -42,15 +45,15 @@
                 <joint name="shoulder_R" type="hinge"
                        axis="0 0 -1" range="0 170"/>
                 <geom name="flipper_R_upper_geom" type="capsule"
-                      fromto="0 0 0  0.3 0 0" size="0.04"
+                      fromto="0 0 0  0.2 0 0" size="0.04"
                       rgba="0.2 0.4 0.7 1"/>
 
                 <!-- front‑right flipper: forearm -->
-                <body name="flipper_R_fore" pos="0.3 0 0">
+                <body name="flipper_R_fore" pos="0.2 0 0">
                     <joint name="elbow_R" type="hinge"
-                           axis="0 0 -1" range="0 90"/>
+                           axis="0 0 -1" range="0 80"/>
                     <geom name="flipper_R_fore_geom" type="capsule"
-                          fromto="0 0 0  0.3 0 0" size="0.035"
+                          fromto="0 0 0  0.2 0 0" size="0.035"
                           rgba="0.2 0.4 0.8 1"/>
                 </body>
             </body>
@@ -65,14 +68,14 @@
 
     <actuator>
         <motor name="motor_shoulder_L" joint="shoulder_L"
-               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_L" joint="elbow_L"
-               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
 
         <motor name="motor_shoulder_R" joint="shoulder_R"
-               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_R" joint="elbow_R"
-               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
     </actuator>
 
     <sensor>
