@@ -62,7 +62,7 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         # for i, name in enumerate(self.model.body_names):
         #     print(f"body index {i:2d}: {name}") 
 
-        print(self.data.body("turtle").id)
+        # print(self.data.body("turtle").id)
         self.once = True
         utils.EzPickle.__init__(self)
 
@@ -223,7 +223,7 @@ class TurtleWorld(World):
         return self.controller
 
     def evaluate_individual(self, genotype):
-        max_steps = 1000
+        max_steps = 5000
         self.geno2pheno(genotype)
         obs = self.reset()
 
@@ -275,7 +275,7 @@ def generate_ea_video(controller, video_name: str = "Turtle_EA.mp4"):
     env = TurtleGymEnv(render_mode="rgb_array", camera_name="topdown")
     obs, _ = env.reset()
     frames = []
-    max_steps = 1000
+    max_steps = 5000
 
     for _ in range(max_steps):
         action = controller.get_action(obs)
@@ -296,7 +296,7 @@ def generate_ppo_video(model, video_name: str = "Turtle_PPO.mp4"):
     env = TurtleGymEnv(render_mode="rgb_array", camera_name="topdown")
     obs, _ = env.reset()
     frames = []
-    max_steps = 1000
+    max_steps = 2000
 
     for _ in range(max_steps):
         action, _ = model.predict(obs, deterministic=True)
@@ -323,27 +323,27 @@ def main():
         # --------------------
         # CMA-ES configuration
         # --------------------
-        num_gen = 100
-        n_parameters = world.n_params
-        CMAES_opts["min"] = -1
-        CMAES_opts["max"] = 1
-        CMAES_opts["num_parents"] = 50
-        CMAES_opts["num_generations"] = num_gen
-        CMAES_opts["mutation_sigma"] = 0.8
+        num_gen = 120
+        # n_parameters = world.n_params
+        # CMAES_opts["min"] = -1
+        # CMAES_opts["max"] = 1
+        # CMAES_opts["num_parents"] = 100
+        # CMAES_opts["num_generations"] = num_gen
+        # CMAES_opts["mutation_sigma"] = 2.0
 
-        population_size = 50
+        # population_size = 200
         results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
         os.makedirs(results_dir, exist_ok=True)
 
-        ea = CMAES(population_size, n_parameters, CMAES_opts, results_dir)
-        run_EA(ea, world)
+        # ea = CMAES(population_size, n_parameters, CMAES_opts, results_dir)
+        # run_EA(ea, world)
 
         # Load best individual and generate video
         last_sample = f"{num_gen-1}"
         best_ind = np.load(os.path.join(results_dir, last_sample, "x_best.npy"))
         world.controller.geno2pheno(best_ind)
         VID_NAME = f"Best_Turtle_EA_{last_sample}.mp4"
-        print(VID_NAME)
+        # print(VID_NAME)
         generate_ea_video(world.controller, VID_NAME)
         print(f"CMA-ES evolution complete. Saved {VID_NAME}.")
 
@@ -374,13 +374,13 @@ def main():
         # ppo_model.learn(total_timesteps=remaining_timesteps)
 
         # You can adjust total_timesteps as needed
-        total_timesteps = 100_000
+        total_timesteps = 1_000_000
         ppo_model = SB3_PPO(
             policy="MlpPolicy",
             env=vec_env,
             verbose=1,
             # tensorboard_log=os.path.join(get_project_root(), "ppo_tensorboard"),
-            device=torch.device("cuda")
+            device=torch.device("cpu")
         )
 
         # Train the PPO agent

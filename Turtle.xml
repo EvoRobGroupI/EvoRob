@@ -12,15 +12,28 @@
         <joint armature="1e-5" damping="1" limited="true"/>
     </default>
 
+     <visual>
+        <rgba rangefinder="1 1 0.1 0.1"/>
+        <map znear=".005" zfar="5"/>
+    </visual>     
+
+    <default class="rangefinder">
+      <site type="capsule" size=".005 .1" material="site" group="4"/>
+    </default>
+
     <worldbody>
         <body name="turtle" pos="0 0 0.36">
             <joint name="root_free" type="free"/>
+
 
             <!-- shell -->
             <geom name="turtle_shell" type="box"
                   size="0.9 0.5 0.36"
             
                   rgba="0.2 0.5 0.2 1"/>
+
+            <site name="rf_00" class="rangefinder" fromto=".41 -.02  .11 .34 0 .115"/>
+
 
             <!-- front‑left flipper: upper arm -->
             <body name="flipper_L_upper" pos="0.8 0.7 0.2">
@@ -58,8 +71,7 @@
                 </body>
             </body>
 
-            <!-- reference point -->
-            <site name="shell_center" pos="0 0 0.08" size="0.01"/>
+            
 
             <camera
                 name="topdown"
@@ -67,6 +79,8 @@
                 pos="0 0 20.0" 
                 xyaxes="0 -1 0   1 0 0"
             />
+
+            
         </body>
 
         <camera name="follow" mode="trackcom"
@@ -88,6 +102,7 @@
     <sensor>
         <accelerometer site="shell_center"/>
         <gyro site="shell_center"/>
+         <rangefinder name="rf_00" site="rf_00"/>
     </sensor>
 
     
