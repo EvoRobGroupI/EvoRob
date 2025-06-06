@@ -6,20 +6,20 @@
 
     <default>
         <geom condim="3" contype="1" conaffinity="1" density="200"
-              solref="0.001 1" solimp="0.7 0.7 0.001"
-              friction="0.03 0.5 0.5" margin="0.02" rgba="0.3 0.6 0.3 1"/>
+              solref="0.02 1" solimp="0.9 0.95 0.001"
+              friction="0.8 0.1 0.001" margin="0.005" rgba="0.3 0.6 0.3 1"/>
               
         <joint armature="1e-5" damping="1" limited="true"/>
     </default>
 
     <worldbody>
-        <body name="turtle" pos="0 0 0.08">
+        <body name="turtle" pos="0 0 0.1">
             <joint name="root_free" type="free"/>
 
             <!-- shell -->
-            <geom name="shell" type="box"
+            <geom name="turtle_shell" type="box"
                   size="0.2 0.12 0.06"
-                  density="1200"
+                  density="200"
                   rgba="0.2 0.5 0.2 1"/>
 
             <!-- front‑left flipper: upper arm -->
@@ -60,6 +60,13 @@
 
             <!-- reference point -->
             <site name="shell_center" pos="0 0 0.08" size="0.01"/>
+
+            <camera
+                name="topdown"
+                mode="fixed"
+                pos="0 0 4.0" 
+                xyaxes="0 -1 0   1 0 0"
+            />
         </body>
 
         <camera name="follow" mode="trackcom"
@@ -82,4 +89,7 @@
         <accelerometer site="shell_center"/>
         <gyro site="shell_center"/>
     </sensor>
+
+    
+
 </mujoco>

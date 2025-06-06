@@ -13,6 +13,7 @@ CMAES_opts = {
     "mutation_sigma": 0.3,
 }
 
+# using CMAES from ex0 solutions
 class CMAES():
     def __init__(self, n_pop, n_params, opts: Dict = CMAES_opts, output_dir='./results/CMAES'):
         self.n_params = n_params
@@ -26,7 +27,7 @@ class CMAES():
         self.current_sigma = opts["mutation_sigma"]
         self.f_new = np.empty(self.n_pop)
 
-        self.cmaes = self.load_cmaes() #TODO
+        self.cmaes = self.load_cmeas()
 
         #% bookkeeping
         self.directory_name = output_dir
@@ -34,27 +35,26 @@ class CMAES():
         self.full_fitness = []
         self.x_best_so_far = None
         self.f_best_so_far = -np.inf
-        self.x = [None]*self.n_pop
-        self.f = [-np.inf]*self.n_pop
+        self.x = [None] * self.n_pop
+        self.f = [-np.inf] * self.n_pop
 
-    def load_cmaes(self):
-        #TODO
-        lower_bounds = ...  # lower bounds per dimension !! check dimensions
-        upper_bounds = ...  # upper bounds per dimension
-        cmaes_params = {
-            'popsize': ...,
-            'bounds': (lower_bounds, upper_bounds),
+    def load_cmeas(self):
+        params = {
+            'popsize': self.n_pop,
+            'bounds': (
+                [self.min] * self.n_params,  # lower bounds per dimension
+                [self.max] * self.n_params,  # upper bounds per dimension
+            ),
         }
-        return cma.CMAEvolutionStrategy(..., ..., inopts=cmaes_params)
+        return cma.CMAEvolutionStrategy(self.current_mean, self.current_sigma, inopts=params)
 
     def ask(self):
-        #TODO
-        new_population = ...
+        new_population = self.cmaes.ask()
+        new_population = np.clip(new_population, self.min, self.max)
         return new_population
 
     def tell(self, solutions, function_values, save_checkpoint=True):
-        #TODO
-        self.cmaes.tell(..., ...)
+        self.cmaes.tell(solutions, -function_values)
 
 
         #% Some bookkeeping
@@ -68,7 +68,6 @@ class CMAES():
             self.f_best_so_far = function_values[best_index]
             self.x_best_so_far = solutions[best_index]
 
-
         if self.current_gen % 5 == 0:
             print(f"Generation {self.current_gen}:\t{self.f_best_so_far}\n"
                   f"Mean fitness:\t{self.f.mean()} +- {self.f.std()}\n"
@@ -79,9 +78,9 @@ class CMAES():
         self.current_gen += 1
 
     def initialise_x0(self, num_parameters):
-        #TODO
-        mean_vector = ...
+        mean_vector = np.random.uniform(low=self.min, high=self.max, size=num_parameters)
         return mean_vector
+
 
     def save_checkpoint(self):
         curr_gen_path = os.path.join(self.directory_name, str(self.current_gen))

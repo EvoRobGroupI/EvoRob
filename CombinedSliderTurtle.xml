@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="two_poles_solid_colors">
+  
+  <compiler angle="degree" coordinate="local" inertiafromgeom="true" autolimits="true" />
+  <option timestep="0.01" integrator="RK4" gravity="0 0 -9.81" />
+
+  
+  <default>
+    <geom friction="0 0 0" />
+  </default>
+
+  <worldbody>
+    
+    <light name="sun" pos="0 0 5" dir="0 0 -1" diffuse="1 1 1" specular="0.1 0.1 0.1" directional="true" cutoff="100" />
+
+    
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.5" rgba="0.2 0.25 0.3 1" />    
+
+    
+    
+    <body><geom type="cylinder" pos="-5.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_0" /></body><body><geom type="cylinder" pos="0.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_1" /></body><body><geom type="cylinder" pos="5.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_2" /></body><body><geom type="cylinder" pos="10.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_3" /></body><body><geom type="cylinder" pos="15.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_4" /></body><body><geom type="cylinder" pos="20.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_5" /></body><body><geom type="cylinder" pos="25.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_6" /></body><body><geom type="cylinder" pos="30.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_7" /></body><body><geom type="cylinder" pos="35.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_8" /></body><body><geom type="cylinder" pos="40.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_9" /></body><body><geom type="cylinder" pos="45.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_10" /></body><body><geom type="cylinder" pos="50.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_11" /></body><body><geom type="cylinder" pos="55.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_12" /></body><body><geom type="cylinder" pos="60.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_13" /></body><body><geom type="cylinder" pos="65.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_14" /></body><body><geom type="cylinder" pos="70.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_15" /></body><body><geom type="cylinder" pos="75.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_16" /></body><body><geom type="cylinder" pos="80.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_17" /></body><body><geom type="cylinder" pos="85.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_18" /></body><body><geom type="cylinder" pos="90.00 -0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_0_19" /></body><body><geom type="cylinder" pos="-5.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_0" /></body><body><geom type="cylinder" pos="0.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_1" /></body><body><geom type="cylinder" pos="5.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_2" /></body><body><geom type="cylinder" pos="10.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_3" /></body><body><geom type="cylinder" pos="15.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_4" /></body><body><geom type="cylinder" pos="20.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_5" /></body><body><geom type="cylinder" pos="25.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_6" /></body><body><geom type="cylinder" pos="30.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_7" /></body><body><geom type="cylinder" pos="35.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_8" /></body><body><geom type="cylinder" pos="40.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_9" /></body><body><geom type="cylinder" pos="45.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_10" /></body><body><geom type="cylinder" pos="50.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_11" /></body><body><geom type="cylinder" pos="55.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_12" /></body><body><geom type="cylinder" pos="60.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_13" /></body><body><geom type="cylinder" pos="65.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_14" /></body><body><geom type="cylinder" pos="70.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_15" /></body><body><geom type="cylinder" pos="75.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_16" /></body><body><geom type="cylinder" pos="80.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_17" /></body><body><geom type="cylinder" pos="85.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_18" /></body><body><geom type="cylinder" pos="90.00 0.35 0.5" size="0.05 0.5" rgba="1 0.3 0.3 1" name="pole_1_19" /></body><body name="turtle" pos="0 0 0.1">
+            <joint name="root_free" type="free" />
+
+            
+            <geom name="turtle_shell" type="box" size="0.2 0.12 0.06" density="200" rgba="0.2 0.5 0.2 1" />
+
+            
+            <body name="flipper_L_upper" pos="0.10 0.15 0.01">
+                <joint name="shoulder_L" type="hinge" axis="0 0 1" range="0 170" />
+                <geom name="flipper_L_upper_geom" type="capsule" fromto="0 0 0  0.2 0 0" size="0.04" rgba="0.2 0.4 0.7 1" />
+
+                
+                <body name="flipper_L_fore" pos="0.2 0 0">
+                    <joint name="elbow_L" type="hinge" axis="0 0 1" range="0 80" />
+                    <geom name="flipper_L_fore_geom" type="capsule" fromto="0 0 0  0.2 0 0" size="0.035" rgba="0.2 0.4 0.8 1" />
+                </body>
+            </body>
+
+            
+            <body name="flipper_R_upper" pos="0.10 -0.15 0.01">
+                <joint name="shoulder_R" type="hinge" axis="0 0 -1" range="0 170" />
+                <geom name="flipper_R_upper_geom" type="capsule" fromto="0 0 0  0.2 0 0" size="0.04" rgba="0.2 0.4 0.7 1" />
+
+                
+                <body name="flipper_R_fore" pos="0.2 0 0">
+                    <joint name="elbow_R" type="hinge" axis="0 0 -1" range="0 80" />
+                    <geom name="flipper_R_fore_geom" type="capsule" fromto="0 0 0  0.2 0 0" size="0.035" rgba="0.2 0.4 0.8 1" />
+                </body>
+            </body>
+
+            
+            <site name="shell_center" pos="0 0 0.08" size="0.01" />
+
+            <camera name="topdown" mode="fixed" pos="0 0 4.0" xyaxes="0 -1 0   1 0 0" />
+        </body>
+
+        <camera name="follow" mode="trackcom" pos="0 -2 0.5" xyaxes="1 0 0 0 0 1" />
+    </worldbody>
+<compiler angle="degree" coordinate="local" />
+    <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4" />
+
+    <default>
+        <geom condim="1" contype="1" conaffinity="1" density="200" solref="0.02 1" solimp="0.9 0.95 0.001" friction="0.8 0.1 0.001" margin="0.005" rgba="0.3 0.6 0.3 1" />
+              
+        <joint armature="1e-5" damping="1" limited="true" />
+    </default>
+
+    <actuator>
+        <motor name="motor_shoulder_L" joint="shoulder_L" gear="80" ctrlrange="-1 1" ctrllimited="true" />
+        <motor name="motor_elbow_L" joint="elbow_L" gear="80" ctrlrange="-1 1" ctrllimited="true" />
+
+        <motor name="motor_shoulder_R" joint="shoulder_R" gear="80" ctrlrange="-1 1" ctrllimited="true" />
+        <motor name="motor_elbow_R" joint="elbow_R" gear="80" ctrlrange="-1 1" ctrllimited="true" />
+    </actuator>
+
+    <sensor>
+        <accelerometer site="shell_center" />
+        <gyro site="shell_center" />
+    </sensor>
+
+    
+
+</mujoco>
