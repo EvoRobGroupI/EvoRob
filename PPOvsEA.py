@@ -140,11 +140,13 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         # if abs(yaw) > 90: print(yaw)
         # print(yaw)
 
-        reward = x_vel + x_pos
+        # reward = x_vel + x_pos
         terminated = (x_pos < -1) or (abs(y_pos) > 3.0)
 
-        # reward = x_vel*(0.1-(abs(yaw)+0.01)/90)
-        # reward = x_vel + x_pos
+        direction_adj = (1-2*(abs(yaw)+0.01)/90)
+        reward = x_vel*direction_adj + x_pos
+        # reward = 0.1
+        # print(f"x_vel: {x_vel}, multiplier: {direction_adj}, reward: {reward}")
         # terminated = (x_pos < -1) or (abs(y_pos) > 3.0) or (abs(yaw) > 45) 
         # reward = x_vel + x_pos - abs(yaw)
         # terminated = (x_pos < -1) or (abs(y_pos) > 3.0) or (abs(yaw) > 45) 
@@ -321,11 +323,12 @@ def main():
         # --------------------
         # CMA-ES configuration
         # --------------------
+        num_gen = 100
         n_parameters = world.n_params
         CMAES_opts["min"] = -1
         CMAES_opts["max"] = 1
         CMAES_opts["num_parents"] = 50
-        CMAES_opts["num_generations"] = 200
+        CMAES_opts["num_generations"] = num_gen
         CMAES_opts["mutation_sigma"] = 0.8
 
         population_size = 50
@@ -336,10 +339,13 @@ def main():
         run_EA(ea, world)
 
         # Load best individual and generate video
-        best_ind = np.load(os.path.join(results_dir, "39", "x_best.npy"))
+        last_sample = f"{num_gen-1}"
+        best_ind = np.load(os.path.join(results_dir, last_sample, "x_best.npy"))
         world.controller.geno2pheno(best_ind)
-        generate_ea_video(world.controller, "Best_Turtle_EA.mp4")
-        print("CMA-ES evolution complete. Saved 'Best_Turtle_EA.mp4'.")
+        VID_NAME = f"Best_Turtle_EA_{last_sample}.mp4"
+        print(VID_NAME)
+        generate_ea_video(world.controller, VID_NAME)
+        print(f"CMA-ES evolution complete. Saved {VID_NAME}.")
 
     elif algorithm == "PPO":
         # --------------------
