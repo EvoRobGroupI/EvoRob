@@ -38,7 +38,7 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         if not os.path.isfile(xml_path):
             raise FileNotFoundError(f"Cannot find XML at {xml_path}")
 
-        frame_skip = 1
+        frame_skip = 2
         m = mujoco.MjModel.from_xml_path(xml_path)
         obs_dim = int(m.nq + m.nv)
         act_dim = int(m.nu)
@@ -58,17 +58,50 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
             camera_name=camera_name,
         )
         self.action_space = action_space
+
+        # for i, name in enumerate(self.model.body_names):
+        #     print(f"body index {i:2d}: {name}") 
+
+        print(self.data.body("turtle").id)
+        self.once = True
         utils.EzPickle.__init__(self)
 
     def _get_obs(self):
         return np.concatenate([self.data.qpos.flat, self.data.qvel.flat])
     
     # def _get_yaw(self):
-    #     # MuJoCo’s base quaternion is in data.xquat[0] as [w, x, y, z]
-    #     w, x, y, z = self.data.xquat[0]
-    #     siny_cosp = 2.0 * (w * z + x * y)
-    #     cosy_cosp = 1.0 - 2.0 * (y * y + z * z)
-    #     return np.arctan2(siny_cosp, cosy_cosp)
+    #     # data.xmat is a flat (n_bodies × 9) array. For body 0, the first 9 entries are its 3×3 rotation.
+    #     # In row-major:   [ R00, R01, R02,
+    #     #                  R10, R11, R12,
+    #     #                  R20, R21, R22 ]
+    #     #
+    #     # If the turtle only spins around z, then yaw = atan2(R10, R00).
+    #     # Read the first two entries of the base’s rotation matrix:
+        
+    #     # if self.data.qpos[0] > 2 and self.once:
+    #     #     print((self.data.xquat))
+    #     #     self.once = False
+    #     # print(len(self.data.xmat[0]))
+    #     # print(self.data.xquat[41])
+    #     R00 = float(self.data.xmat[0][0])  # entry (0,0)
+    #     R10 = float(self.data.xmat[3][0])  # entry (1,0)
+
+    #     # If both are effectively zero (i.e. R is not yet valid), return 0.0:
+    #     if abs(R00) < 1e-8 and abs(R10) < 1e-8:
+    #         return 0.0
+
+    #     # Otherwise compute yaw = atan2(R10, R00)
+    #     return float(np.arctan2(R10, R00))
+    
+    def _get_yaw(self):
+    #     # Suppose this is the very first sensor, so its quaternion is at data.sensordata[0:4]
+        # print(self.data.xquat[41])
+        w, x, y, z = self.data.xquat[41]
+        siny_cosp = 2.0 * (w * z + x * y)
+        cosy_cosp = 1.0 - 2.0 * (y*y + z*z)
+        yaw_rad = float(np.arctan2(siny_cosp, cosy_cosp))
+        yaw_deg = np.degrees(yaw_rad)
+        return yaw_deg
 
     def step(self, action):
 
@@ -97,19 +130,31 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         y_pos = self.data.qpos[1]
         x_vel = self.data.qvel[0]
 
-        # yaw_rate = self.data.qvel[5]   # its within 5, max 3 really
-        # yaw = self._get_yaw()
-        # if abs(yaw) > 45: print(yaw)
+        # if x_pos > 2:
+        #     print(self.data.xquat[0])
+
+        # w, x, y, z = self.data.
+
+        yaw_rate = self.data.qvel[5]   # its within 5, max 3 really
+        yaw = self._get_yaw()
+        # if abs(yaw) > 90: print(yaw)
         # print(yaw)
 
-        reward = x_vel
+        reward = x_vel + x_pos
+        terminated = (x_pos < -1) or (abs(y_pos) > 3.0)
+
+        # reward = x_vel*(0.1-(abs(yaw)+0.01)/90)
+        # reward = x_vel + x_pos
+        # terminated = (x_pos < -1) or (abs(y_pos) > 3.0) or (abs(yaw) > 45) 
+        # reward = x_vel + x_pos - abs(yaw)
+        # terminated = (x_pos < -1) or (abs(y_pos) > 3.0) or (abs(yaw) > 45) 
+        # if terminated and (abs(yaw) > 10): print("terminated")
 
         # reward = x_vel + x_pos# - 0.5 * abs(y_pos) - abs(yaw) # - 100 * abs(yaw_rate)
         # terminated = (x_vel < -0.05) or (abs(y_pos) > 3.0) #or abs(yaw) > 90 #or (abs(yaw_rate) > 2)
+        
 
-        terminated = False
-
-        # terminated = (x_vel < -0.05) or (abs(y_pos) > 3.0) 
+        # terminated = False
         truncated = False
         info = {
             "x_pos": x_pos,
@@ -176,7 +221,7 @@ class TurtleWorld(World):
         return self.controller
 
     def evaluate_individual(self, genotype):
-        max_steps = 500
+        max_steps = 1000
         self.geno2pheno(genotype)
         obs = self.reset()
 
@@ -280,10 +325,10 @@ def main():
         CMAES_opts["min"] = -1
         CMAES_opts["max"] = 1
         CMAES_opts["num_parents"] = 50
-        CMAES_opts["num_generations"] = 20
-        CMAES_opts["mutation_sigma"] = 0.2
+        CMAES_opts["num_generations"] = 200
+        CMAES_opts["mutation_sigma"] = 0.8
 
-        population_size = 20
+        population_size = 50
         results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
         os.makedirs(results_dir, exist_ok=True)
 

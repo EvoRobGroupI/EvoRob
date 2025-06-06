@@ -24,10 +24,11 @@ for geom in list(slider_worldbody.findall("geom")):
 num_rows = 2
 num_cols = 20
 spacing_x = 5  # meters between poles along X
-spacing_y = 4  # meters between poles along Y
+spacing_y = 3.14  # meters between poles along Y
+adjust_x = 0.5
 
 # You can adjust starts so that the grid is centered or offset as desired
-x_start = -spacing_x
+x_start = -spacing_x + adjust_x
 y_start = -spacing_y / 2
 
 for row in range(num_rows):

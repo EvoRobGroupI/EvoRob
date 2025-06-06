@@ -75,14 +75,14 @@
 
     <actuator>
         <motor name="motor_shoulder_L" joint="shoulder_L"
-               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="400" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_L" joint="elbow_L"
-               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="400" ctrlrange="-1 1" ctrllimited="true"/>
 
         <motor name="motor_shoulder_R" joint="shoulder_R"
-               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="400" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_R" joint="elbow_R"
-               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="400" ctrlrange="-1 1" ctrllimited="true"/>
     </actuator>
 
     <sensor>
