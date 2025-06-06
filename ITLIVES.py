@@ -34,7 +34,7 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         if not os.path.isfile(xml_path):
             raise FileNotFoundError(f"Cannot find XML at {xml_path}")
 
-        frame_skip = 5
+        frame_skip = 3
 
         m = mujoco.MjModel.from_xml_path(xml_path)
         obs_dim = int(m.nq + m.nv)
@@ -43,7 +43,6 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         from gymnasium.spaces import Box
     
         xml_path = os.path.join(get_project_root(), "CombinedSliderTurtle.xml")
-        ...
 
         # build the spaces first
         obs_high  = np.inf * np.ones(obs_dim, dtype=np.float64)
@@ -150,13 +149,12 @@ def generate_best_individual_video(controller, video_name: str = "Turtle_video.m
     env = TurtleGymEnv(render_mode="rgb_array", camera_name = "topdown")
     obs, _ = env.reset()
     frames = []
-    max_steps = 500
+    max_steps = 1000
 
     for _ in range(max_steps):
         action = controller.get_action(obs)
         obs, reward, terminated, truncated, _ = env.step(action)
 
-        # Tell MuJoCo to use the “follow” camera (which tracks COM from (0,-2,0.5))
         frame = env.render()
         frames.append(frame)
 
@@ -175,7 +173,7 @@ def main():
     CMAES_opts["min"] = -1
     CMAES_opts["max"] = 1
     CMAES_opts["num_parents"] = 50
-    CMAES_opts["num_generations"] = 100
+    CMAES_opts["num_generations"] = 5
     CMAES_opts["mutation_sigma"] = 0.2
 
     population_size = 20
@@ -184,7 +182,7 @@ def main():
 
     run_EA(ea, world)
 
-    best_ind = np.load(os.path.join(results_dir, "99", "x_best.npy"))
+    best_ind = np.load(os.path.join(results_dir, "39", "x_best.npy"))
     world.controller.geno2pheno(best_ind)
     generate_best_individual_video(world.controller, "Best_Turtle_Evo.mp4")
 

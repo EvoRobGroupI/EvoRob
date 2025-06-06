@@ -5,55 +5,55 @@
     <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4"/>
 
     <default>
-        <geom condim="3" contype="1" conaffinity="1" density="200"
-              solref="0.02 1" solimp="0.9 0.95 0.001"
-              friction="0.8 0.1 0.001" margin="0.005" rgba="0.3 0.6 0.3 1"/>
+        <geom condim="3" contype="1" conaffinity="1" density="20"
+              solref="0.005 1" solimp="0.9 0.95 0.001"
+              friction="0.03 0.03 0.001" margin="0.005" rgba="0.3 0.6 0.3 1"/>
               
         <joint armature="1e-5" damping="1" limited="true"/>
     </default>
 
     <worldbody>
-        <body name="turtle" pos="0 0 0.1">
+        <body name="turtle" pos="0 0 0.36">
             <joint name="root_free" type="free"/>
 
             <!-- shell -->
             <geom name="turtle_shell" type="box"
-                  size="0.2 0.12 0.06"
-                  density="200"
+                  size="0.9 0.5 0.36"
+            
                   rgba="0.2 0.5 0.2 1"/>
 
             <!-- front‑left flipper: upper arm -->
-            <body name="flipper_L_upper" pos="0.10 0.15 0.01">
+            <body name="flipper_L_upper" pos="0.8 0.7 0.2">
                 <joint name="shoulder_L" type="hinge"
                        axis="0 0 1" range="0 170"/>
                 <geom name="flipper_L_upper_geom" type="capsule"
-                      fromto="0 0 0  0.2 0 0" size="0.04"
+                      fromto="0 0 0  0.6 0 0" size="0.15"
                       rgba="0.2 0.4 0.7 1"/>
 
                 <!-- front‑left flipper: forearm -->
-                <body name="flipper_L_fore" pos="0.2 0 0">
+                <body name="flipper_L_fore" pos="0.8 0 0">
                     <joint name="elbow_L" type="hinge"
                            axis="0 0 1" range="0 80"/>
                     <geom name="flipper_L_fore_geom" type="capsule"
-                          fromto="0 0 0  0.2 0 0" size="0.035"
+                          fromto="0 0 0  0.6 0 0" size="0.15"
                           rgba="0.2 0.4 0.8 1"/>
                 </body>
             </body>
 
             <!-- front‑right flipper: upper arm -->
-            <body name="flipper_R_upper" pos="0.10 -0.15 0.01">
+            <body name="flipper_R_upper" pos="0.8 -0.7 0.2">
                 <joint name="shoulder_R" type="hinge"
                        axis="0 0 -1" range="0 170"/>
                 <geom name="flipper_R_upper_geom" type="capsule"
-                      fromto="0 0 0  0.2 0 0" size="0.04"
+                      fromto="0 0 0  0.6 0 0" size="0.15"
                       rgba="0.2 0.4 0.7 1"/>
 
                 <!-- front‑right flipper: forearm -->
-                <body name="flipper_R_fore" pos="0.2 0 0">
+                <body name="flipper_R_fore" pos="0.8 0 0">
                     <joint name="elbow_R" type="hinge"
                            axis="0 0 -1" range="0 80"/>
                     <geom name="flipper_R_fore_geom" type="capsule"
-                          fromto="0 0 0  0.2 0 0" size="0.035"
+                          fromto="0 0 0  0.6 0 0" size="0.15"
                           rgba="0.2 0.4 0.8 1"/>
                 </body>
             </body>
@@ -64,7 +64,7 @@
             <camera
                 name="topdown"
                 mode="fixed"
-                pos="0 0 4.0" 
+                pos="0 0 20.0" 
                 xyaxes="0 -1 0   1 0 0"
             />
         </body>
@@ -75,14 +75,14 @@
 
     <actuator>
         <motor name="motor_shoulder_L" joint="shoulder_L"
-               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_L" joint="elbow_L"
-               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
 
         <motor name="motor_shoulder_R" joint="shoulder_R"
-               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_R" joint="elbow_R"
-               gear="80" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="200" ctrlrange="-1 1" ctrllimited="true"/>
     </actuator>
 
     <sensor>

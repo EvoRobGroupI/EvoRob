@@ -24,7 +24,7 @@ for geom in list(slider_worldbody.findall("geom")):
 num_rows = 2
 num_cols = 20
 spacing_x = 5  # meters between poles along X
-spacing_y = 0.7  # meters between poles along Y
+spacing_y = 4  # meters between poles along Y
 
 # You can adjust starts so that the grid is centered or offset as desired
 x_start = -spacing_x
@@ -40,8 +40,8 @@ for row in range(num_rows):
             "geom",
             {
                 "type": "cylinder",
-                "pos": f"{x:.2f} {y:.2f} 0.5",
-                "size": "0.05 0.5",
+                "pos": f"{x:.2f} {y:.2f} 1.2",
+                "size": "0.25 2",
                 "rgba": "1 0.3 0.3 1",
                 "name": f"pole_{row}_{col}",
             },
