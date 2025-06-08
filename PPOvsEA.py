@@ -247,6 +247,7 @@ class TurtleWorld(World):
         total_reward = 0.0
         for _ in range(max_steps):
             action = self.controller.get_action(obs)
+            print(action)
             obs, reward, done, _ = self.step(action)
             total_reward += reward
             steps_taken += 1
