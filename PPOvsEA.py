@@ -67,7 +67,18 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         utils.EzPickle.__init__(self)
 
     def _get_obs(self):
-        return np.concatenate([self.data.qpos.flat, self.data.qvel.flat])
+
+        # Basic joint pos/vel
+        obs = np.concatenate([self.data.qpos.flat, self.data.qvel.flat])
+        # rf_idx = self.model.sensor_name2id("rf_00_sensor")  # or whatever you named it
+        # rf_val = self.data.sensordata[rf_idx]               # This is a float (distance in meters)
+        # obs = np.concatenate([obs, [rf_val]])
+
+        yaw = self._get_yaw()
+
+        obs = np.concatenate([obs, [yaw]])
+
+        return obs
     
     # def _get_yaw(self):
     #     # data.xmat is a flat (n_bodies × 9) array. For body 0, the first 9 entries are its 3×3 rotation.
@@ -141,10 +152,10 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         # print(yaw)
 
         # reward = x_vel + x_pos
-        terminated = (x_pos < -1) or (abs(y_pos) > 3.0)
+        terminated = (x_pos < -1) or (abs(y_pos) > 2.0) or (abs(yaw)>80)
 
-        direction_adj = (1-2*(abs(yaw)+0.01)/90)
-        reward = x_vel*direction_adj + x_pos
+        direction_adj = (1-5*(abs(yaw)+0.01)/90)
+        reward = 2*x_vel*direction_adj + x_pos
         # reward = 0.1
         # print(f"x_vel: {x_vel}, multiplier: {direction_adj}, reward: {reward}")
         # terminated = (x_pos < -1) or (abs(y_pos) > 3.0) or (abs(yaw) > 45) 
@@ -206,7 +217,8 @@ class TurtleWorld(World):
         obs, _ = self.env.reset()
         self.state_space = obs.shape[0]
         self.action_space = self.env.action_space.shape[0]
-        self.controller = MLP.NNController(self.state_space, self.action_space)
+        # self.controller = MLP.NNController(self.state_space, self.action_space)
+        self.controller = MLP.NN_najaroController(self.state_space, self.action_space)
         self.n_params = self.controller.n_params
 
     def reset(self):
@@ -223,7 +235,7 @@ class TurtleWorld(World):
         return self.controller
 
     def evaluate_individual(self, genotype):
-        max_steps = 5000
+        max_steps = 1000
         self.geno2pheno(genotype)
         obs = self.reset()
 
@@ -275,7 +287,7 @@ def generate_ea_video(controller, video_name: str = "Turtle_EA.mp4"):
     env = TurtleGymEnv(render_mode="rgb_array", camera_name="topdown")
     obs, _ = env.reset()
     frames = []
-    max_steps = 5000
+    max_steps = 2000
 
     for _ in range(max_steps):
         action = controller.get_action(obs)
@@ -296,7 +308,7 @@ def generate_ppo_video(model, video_name: str = "Turtle_PPO.mp4"):
     env = TurtleGymEnv(render_mode="rgb_array", camera_name="topdown")
     obs, _ = env.reset()
     frames = []
-    max_steps = 2000
+    max_steps = 10000
 
     for _ in range(max_steps):
         action, _ = model.predict(obs, deterministic=True)
@@ -324,19 +336,19 @@ def main():
         # CMA-ES configuration
         # --------------------
         num_gen = 120
-        # n_parameters = world.n_params
-        # CMAES_opts["min"] = -1
-        # CMAES_opts["max"] = 1
-        # CMAES_opts["num_parents"] = 100
-        # CMAES_opts["num_generations"] = num_gen
-        # CMAES_opts["mutation_sigma"] = 2.0
+        n_parameters = world.n_params
+        CMAES_opts["min"] = -1
+        CMAES_opts["max"] = 1
+        CMAES_opts["num_parents"] = 200
+        CMAES_opts["num_generations"] = num_gen
+        CMAES_opts["mutation_sigma"] = 0.6
 
-        # population_size = 200
+        population_size = 200
         results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
         os.makedirs(results_dir, exist_ok=True)
 
-        # ea = CMAES(population_size, n_parameters, CMAES_opts, results_dir)
-        # run_EA(ea, world)
+        ea = CMAES(population_size, n_parameters, CMAES_opts, results_dir)
+        run_EA(ea, world)
 
         # Load best individual and generate video
         last_sample = f"{num_gen-1}"
@@ -369,12 +381,12 @@ def main():
 
         ## IF PAST MODEL WAS INTERRUPTED
 
-        # ppo_model = SB3_PPO.load("ppo_interrupted.zip", env=vec_env, device="cuda")
+        # ppo_model = SB3_PPO.load("ppo_interrupted.zip", env=vec_env, device="cpu")
         # remaining_timesteps = 500000
         # ppo_model.learn(total_timesteps=remaining_timesteps)
 
         # You can adjust total_timesteps as needed
-        total_timesteps = 1_000_000
+        total_timesteps = 5_000_000
         ppo_model = SB3_PPO(
             policy="MlpPolicy",
             env=vec_env,

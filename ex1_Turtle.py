@@ -58,10 +58,10 @@ if ENV_KEY == "slider":
 
     with open("combined.xml", "w") as f:
         f.write(f"""
-<mujoco model='slider_plus_turtle'>
-  <include file='{inf_path}'/>
-  <include file='{XML_PATHS['turtle']}'/>
-</mujoco>
+    <mujoco model='slider_plus_turtle'>
+        <include file='{inf_path}'/>
+        <include file='{XML_PATHS['turtle']}'/>
+    </mujoco>
         """)
     XML_PATHS["slider"] = Path("combined.xml")
 
@@ -74,8 +74,6 @@ if ENV_KEY != "cheetah":
     if env_id not in gym.registry:
         register(id=env_id, entry_point=lambda **kw: MujocoXMLWrapper(XML_PATHS[ENV_KEY], **kw), max_episode_steps=1000)
     ENV_NAME = env_id
-else:
-    ENV_NAME = "HalfCheetah-v5"
 
 class CheetahWorld(World):
     def __init__(self):

@@ -20,69 +20,49 @@
     
     <body><geom type="cylinder" pos="-4.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_0" /></body><body><geom type="cylinder" pos="0.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_1" /></body><body><geom type="cylinder" pos="5.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_2" /></body><body><geom type="cylinder" pos="10.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_3" /></body><body><geom type="cylinder" pos="15.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_4" /></body><body><geom type="cylinder" pos="20.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_5" /></body><body><geom type="cylinder" pos="25.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_6" /></body><body><geom type="cylinder" pos="30.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_7" /></body><body><geom type="cylinder" pos="35.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_8" /></body><body><geom type="cylinder" pos="40.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_9" /></body><body><geom type="cylinder" pos="45.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_10" /></body><body><geom type="cylinder" pos="50.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_11" /></body><body><geom type="cylinder" pos="55.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_12" /></body><body><geom type="cylinder" pos="60.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_13" /></body><body><geom type="cylinder" pos="65.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_14" /></body><body><geom type="cylinder" pos="70.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_15" /></body><body><geom type="cylinder" pos="75.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_16" /></body><body><geom type="cylinder" pos="80.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_17" /></body><body><geom type="cylinder" pos="85.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_18" /></body><body><geom type="cylinder" pos="90.50 -1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_0_19" /></body><body><geom type="cylinder" pos="-4.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_0" /></body><body><geom type="cylinder" pos="0.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_1" /></body><body><geom type="cylinder" pos="5.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_2" /></body><body><geom type="cylinder" pos="10.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_3" /></body><body><geom type="cylinder" pos="15.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_4" /></body><body><geom type="cylinder" pos="20.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_5" /></body><body><geom type="cylinder" pos="25.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_6" /></body><body><geom type="cylinder" pos="30.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_7" /></body><body><geom type="cylinder" pos="35.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_8" /></body><body><geom type="cylinder" pos="40.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_9" /></body><body><geom type="cylinder" pos="45.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_10" /></body><body><geom type="cylinder" pos="50.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_11" /></body><body><geom type="cylinder" pos="55.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_12" /></body><body><geom type="cylinder" pos="60.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_13" /></body><body><geom type="cylinder" pos="65.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_14" /></body><body><geom type="cylinder" pos="70.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_15" /></body><body><geom type="cylinder" pos="75.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_16" /></body><body><geom type="cylinder" pos="80.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_17" /></body><body><geom type="cylinder" pos="85.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_18" /></body><body><geom type="cylinder" pos="90.50 1.57 1.2" size="0.25 2" rgba="1 0.3 0.3 1" name="pole_1_19" /></body><body name="turtle" pos="0 0 0.36">
             <joint name="root_free" type="free" />
-
-
-            
-            <geom name="turtle_shell" type="box" size="0.9 0.5 0.36" rgba="0.2 0.5 0.2 1" />
-
-            <site name="rf_00" class="rangefinder" fromto=".41 -.02  .11 .34 0 .115" />
-
-
-            
+            <geom name="turtle_shell" type="box" density="50" size="0.9 0.5 0.36" rgba="0.2 0.5 0.2 1" />
+            <site name="shell_center" pos="0 0 0.08" size="0.01" />
+            <site name="rf_00" class="rangefinder" fromto="0.95 0.00 0.36   -1.00 0.00 0.36" />
             <body name="flipper_L_upper" pos="0.8 0.7 0.2">
                 <joint name="shoulder_L" type="hinge" axis="0 0 1" range="0 170" />
-                <geom name="flipper_L_upper_geom" type="capsule" fromto="0 0 0  0.6 0 0" size="0.15" rgba="0.2 0.4 0.7 1" />
-
-                
-                <body name="flipper_L_fore" pos="0.8 0 0">
-                    <joint name="elbow_L" type="hinge" axis="0 0 1" range="0 80" />
-                    <geom name="flipper_L_fore_geom" type="capsule" fromto="0 0 0  0.6 0 0" size="0.15" rgba="0.2 0.4 0.8 1" />
+                <geom type="capsule" fromto="0 0 0  1.1 0 0" size="0.15" rgba="0.2 0.4 0.7 1" />
+                <body name="flipper_L_fore" pos="1.1 0 0">
+                    <joint name="elbow_L" type="hinge" axis="0 0 1" range="0 5" />
+                    <geom type="capsule" fromto="0 0 0  0.1 0 0" size="0.15" rgba="0.2 0.4 0.8 1" />
                 </body>
             </body>
-
-            
             <body name="flipper_R_upper" pos="0.8 -0.7 0.2">
                 <joint name="shoulder_R" type="hinge" axis="0 0 -1" range="0 170" />
-                <geom name="flipper_R_upper_geom" type="capsule" fromto="0 0 0  0.6 0 0" size="0.15" rgba="0.2 0.4 0.7 1" />
-
-                
-                <body name="flipper_R_fore" pos="0.8 0 0">
-                    <joint name="elbow_R" type="hinge" axis="0 0 -1" range="0 80" />
-                    <geom name="flipper_R_fore_geom" type="capsule" fromto="0 0 0  0.6 0 0" size="0.15" rgba="0.2 0.4 0.8 1" />
+                <geom type="capsule" fromto="0 0 0  1.1 0 0" size="0.15" rgba="0.2 0.4 0.7 1" />
+                <body name="flipper_R_fore" pos="1.1 0 0">
+                    <joint name="elbow_R" type="hinge" axis="0 0 -1" range="0 5" />
+                    <geom type="capsule" fromto="0 0 0  0.1 0 0" size="0.15" rgba="0.2 0.4 0.8 1" />
                 </body>
             </body>
-
-            
-
-            <camera name="topdown" mode="fixed" pos="0 0 20.0" xyaxes="0 -1 0   1 0 0" />
-
-            
+            <camera name="topdown" mode="fixed" pos="0 0 20" xyaxes="0 -1 0  1 0 0" />
         </body>
-
-        <camera name="follow" mode="trackcom" pos="0 -2 0.5" xyaxes="1 0 0 0 0 1" />
+        <camera name="follow" mode="trackcom" pos="0 -2 0.5" xyaxes="1 0 0  0 0 1" />
     </worldbody>
 <compiler angle="degree" coordinate="local" />
     <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4" />
 
+    <asset>
+        <material name="site" rgba="0.1 0.8 0.1 1" />
+    </asset>
+
     <default>
-        <geom condim="3" contype="1" conaffinity="1" density="20" solref="0.005 1" solimp="0.9 0.95 0.001" friction="0.03 0.03 0.001" margin="0.005" rgba="0.3 0.6 0.3 1" />
-              
+        <geom condim="3" contype="1" conaffinity="1" density="10" solref="0.005 1" solimp="0.9 0.95 0.001" friction="0.5 0.03 0.001" margin="0.005" rgba="0.3 0.6 0.3 1" />
         <joint armature="1e-5" damping="1" limited="true" />
+        <default class="rangefinder">
+            <site type="capsule" size=".005 .1" material="site" group="4" />
+        </default>
     </default>
 
-     <visual>
-        <rgba rangefinder="1 1 0.1 0.1" />
-        <map znear=".005" zfar="5" />
-    </visual>     
-
-    <default class="rangefinder">
-      <site type="capsule" size=".005 .1" material="site" group="4" />
-    </default>
+    
 
     <actuator>
         <motor name="motor_shoulder_L" joint="shoulder_L" gear="400" ctrlrange="-1 1" ctrllimited="true" />
         <motor name="motor_elbow_L" joint="elbow_L" gear="400" ctrlrange="-1 1" ctrllimited="true" />
-
         <motor name="motor_shoulder_R" joint="shoulder_R" gear="400" ctrlrange="-1 1" ctrllimited="true" />
         <motor name="motor_elbow_R" joint="elbow_R" gear="400" ctrlrange="-1 1" ctrllimited="true" />
     </actuator>
@@ -90,9 +70,7 @@
     <sensor>
         <accelerometer site="shell_center" />
         <gyro site="shell_center" />
-         <rangefinder name="rf_00" site="rf_00" />
+        
     </sensor>
-
-    
 
 </mujoco>
