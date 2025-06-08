@@ -10,9 +10,9 @@
     </asset>
 
     <default>
-        <geom  condim="3" contype="1" conaffinity="1" density="20"
+        <geom  condim="3" contype="1" conaffinity="1" density="40"
                solref="0.005 1" solimp="0.9 0.95 0.001"
-               friction="0.4 0.5 0.001" margin="0.005"
+               friction="0.8 0.5 0.001" margin="0.005"
                rgba="0.3 0.6 0.3 1"/>
         <joint armature="1e-5" damping="1" limited="true"/>
         <default class="rangefinder">
@@ -65,13 +65,13 @@
 
     <actuator>
         <motor name="motor_shoulder_L" joint="shoulder_L"
-               gear="500" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_L"    joint="elbow_L"
-               gear="500" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_shoulder_R" joint="shoulder_R"
-               gear="500" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
         <motor name="motor_elbow_R"    joint="elbow_R"
-               gear="500" ctrlrange="-1 1" ctrllimited="true"/>
+               gear="100" ctrlrange="-1 1" ctrllimited="true"/>
     </actuator>
 
     <sensor>

@@ -57,8 +57,8 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         obs = np.concatenate([self.data.qpos.flat, self.data.qvel.flat])
-        yaw = self._get_yaw()
-        obs = np.concatenate([obs, [yaw]])
+        # yaw = self._get_yaw()
+        # obs = np.concatenate([obs, [yaw]])
         return obs
     
     def step(self, action):
@@ -111,7 +111,7 @@ def generate_ea_video(controller, video_name="Turtle_EA.mp4"):
 # Main: Select generation, load individual, and make video
 # ----------------------------------------------------------------------
 def main():
-    gen = 6  # <<==== CHANGE THIS to the generation you want
+    gen = 75  # <<==== CHANGE THIS to the generation you want
     results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
     best_ind = np.load(os.path.join(results_dir, f"{gen}", "x_best.npy"))
     world = TurtleWorld()

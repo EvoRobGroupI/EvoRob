@@ -327,7 +327,7 @@ def generate_ppo_video(model, video_name: str = "Turtle_PPO.mp4"):
 # -----------------------------------------------------------------------------
 def main():
     # Choose algorithm: "CMAES" or "PPO"
-    algorithm = "PPO"  # <-- change this to "PPO" to use PPO instead of CMAES
+    algorithm = "EA"  # <-- change this to "PPO" to use PPO instead of CMAES
 
     world = TurtleWorld()
 
