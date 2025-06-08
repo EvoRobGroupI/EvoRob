@@ -2,12 +2,13 @@
 <mujoco model="paddle_turtle_body">
     <!-- global defaults -->
     <compiler angle="degree" coordinate="local"/>
+
     <option timestep="0.002" gravity="0 0 -9.81" iterations="50" integrator="RK4"/>
 
     <default>
         <geom condim="3" contype="1" conaffinity="1" density="20"
               solref="0.005 1" solimp="0.9 0.95 0.001"
-              friction="0.03 0.03 0.001" margin="0.005" rgba="0.3 0.6 0.3 1"/>
+              friction="0.3 0.03 0.001" margin="0.005" rgba="0.3 0.6 0.3 1"/>
               
         <joint armature="1e-5" damping="1" limited="true"/>
     </default>
@@ -19,7 +20,7 @@
             <!-- shell -->
             <geom name="turtle_shell" type="box"
                   size="0.9 0.5 0.36"
-            
+                  density="30"
                   rgba="0.2 0.5 0.2 1"/>
 
             <!-- front‑left flipper: upper arm -->
@@ -85,11 +86,16 @@
                gear="400" ctrlrange="-1 1" ctrllimited="true"/>
     </actuator>
 
+    <keyframe>
+        <key name="tucked"
+            qpos='1.0 0 0.365 0.0 0.0 0.0 0.0 2.8 0.2 2.8 0.2'/>
+    </keyframe>
+
     <sensor>
         <accelerometer site="shell_center"/>
         <gyro site="shell_center"/>
     </sensor>
-
+ 
     
 
 </mujoco>

@@ -15,15 +15,27 @@ CMAES_opts = {
 
 # using CMAES from ex0 solutions
 class CMAES():
-    def __init__(self, n_pop, n_params, opts: Dict = CMAES_opts, output_dir='./results/CMAES'):
+    # def __init__(self, n_pop, n_params, opts: Dict = CMAES_opts, output_dir='./results/CMAES'):
+    def __init__(self, n_pop, n_params, opts: Dict = CMAES_opts,
+            output_dir='./results/CMAES', init_mean: np.ndarray = None):
         self.n_params = n_params
         self.n_pop = n_pop
         self.n_gen = opts["num_generations"]
         self.min = opts["min"]
         self.max = opts["max"]
-
+        self.opts = opts
         self.current_gen = 0
-        self.current_mean = self.initialise_x0(n_params)
+        # self.current_mean = self.initialise_x0(n_params)
+        ####################################################
+        # if the user provided a Xavier init vector, use it
+        if init_mean is not None:
+            assert init_mean.shape == (n_params,)
+            self.current_mean = init_mean.copy()
+            print("xavier init")
+        else:
+            self.current_mean = self.initialise_x0(n_params)
+            print("x0 initialization")
+        #################################################
         self.current_sigma = opts["mutation_sigma"]
         self.f_new = np.empty(self.n_pop)
 
@@ -39,11 +51,21 @@ class CMAES():
         self.f = [-np.inf] * self.n_pop
 
     def load_cmeas(self):
+        # params = {
+        #     'popsize': self.n_pop,
+        #     'bounds': (
+        #         [self.min] * self.n_params,  # lower bounds per dimension
+        #         [self.max] * self.n_params,  # upper bounds per dimension
+        #     ),
+        # }
         params = {
             'popsize': self.n_pop,
-            'bounds': (
-                [self.min] * self.n_params,  # lower bounds per dimension
-                [self.max] * self.n_params,  # upper bounds per dimension
+            'cma_mu'     : self.opts["num_parents"],     # select top μ parents
+            # 'sigma_restart': self.opts["sigma_restart"],
+            'tolx'   : self.opts["tolx"],
+            'bounds' : (
+                [self.min] * self.n_params,
+                [self.max] * self.n_params,
             ),
         }
         return cma.CMAEvolutionStrategy(self.current_mean, self.current_sigma, inopts=params)
@@ -52,6 +74,9 @@ class CMAES():
         new_population = self.cmaes.ask()
         new_population = np.clip(new_population, self.min, self.max)
         return new_population
+
+
+
 
     def tell(self, solutions, function_values, save_checkpoint=True):
         self.cmaes.tell(solutions, -function_values)

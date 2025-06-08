@@ -1,0 +1,218 @@
+<mujoco model="two_poles_solid_colors">
+  <compiler angle="radian"/>
+
+  <option integrator="RK4" iterations="50"/>
+
+  <size nkey="1"/>
+
+  <default>
+    <joint limited="true" armature="1e-05" damping="1"/>
+    <geom friction="0.03 0.03 0.001" solref="0.005" margin="0.005" density="20" rgba="0.3 0.6 0.3 1"/>
+  </default>
+
+  <worldbody>
+    <geom name="ground" size="100 100 0.5" type="plane" rgba="0.2 0.25 0.3 1"/>
+    <camera name="follow" pos="0 -2 0.5" quat="0.707107 0.707107 0 0" mode="trackcom"/>
+    <light name="sun" pos="0 0 5" dir="0 0 -1" directional="true" cutoff="100" diffuse="1 1 1" specular="0.1 0.1 0.1"/>
+    <body name="pole_0_0">
+      <geom name="pole_0_0" size="0.25 2" pos="-4 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_1">
+      <geom name="pole_0_1" size="0.25 2" pos="1 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_2">
+      <geom name="pole_0_2" size="0.25 2" pos="6 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_3">
+      <geom name="pole_0_3" size="0.25 2" pos="11 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_4">
+      <geom name="pole_0_4" size="0.25 2" pos="16 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_5">
+      <geom name="pole_0_5" size="0.25 2" pos="21 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_6">
+      <geom name="pole_0_6" size="0.25 2" pos="26 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_7">
+      <geom name="pole_0_7" size="0.25 2" pos="31 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_8">
+      <geom name="pole_0_8" size="0.25 2" pos="36 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_9">
+      <geom name="pole_0_9" size="0.25 2" pos="41 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_10">
+      <geom name="pole_0_10" size="0.25 2" pos="46 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_11">
+      <geom name="pole_0_11" size="0.25 2" pos="51 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_12">
+      <geom name="pole_0_12" size="0.25 2" pos="56 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_13">
+      <geom name="pole_0_13" size="0.25 2" pos="61 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_14">
+      <geom name="pole_0_14" size="0.25 2" pos="66 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_15">
+      <geom name="pole_0_15" size="0.25 2" pos="71 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_16">
+      <geom name="pole_0_16" size="0.25 2" pos="76 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_17">
+      <geom name="pole_0_17" size="0.25 2" pos="81 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_18">
+      <geom name="pole_0_18" size="0.25 2" pos="86 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_0_19">
+      <geom name="pole_0_19" size="0.25 2" pos="91 -1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_0">
+      <geom name="pole_1_0" size="0.25 2" pos="-4 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_1">
+      <geom name="pole_1_1" size="0.25 2" pos="1 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_2">
+      <geom name="pole_1_2" size="0.25 2" pos="6 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_3">
+      <geom name="pole_1_3" size="0.25 2" pos="11 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_4">
+      <geom name="pole_1_4" size="0.25 2" pos="16 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_5">
+      <geom name="pole_1_5" size="0.25 2" pos="21 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_6">
+      <geom name="pole_1_6" size="0.25 2" pos="26 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_7">
+      <geom name="pole_1_7" size="0.25 2" pos="31 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_8">
+      <geom name="pole_1_8" size="0.25 2" pos="36 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_9">
+      <geom name="pole_1_9" size="0.25 2" pos="41 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_10">
+      <geom name="pole_1_10" size="0.25 2" pos="46 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_11">
+      <geom name="pole_1_11" size="0.25 2" pos="51 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_12">
+      <geom name="pole_1_12" size="0.25 2" pos="56 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_13">
+      <geom name="pole_1_13" size="0.25 2" pos="61 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_14">
+      <geom name="pole_1_14" size="0.25 2" pos="66 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_15">
+      <geom name="pole_1_15" size="0.25 2" pos="71 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_16">
+      <geom name="pole_1_16" size="0.25 2" pos="76 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_17">
+      <geom name="pole_1_17" size="0.25 2" pos="81 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_18">
+      <geom name="pole_1_18" size="0.25 2" pos="86 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="pole_1_19">
+      <geom name="pole_1_19" size="0.25 2" pos="91 1.57 1.2" type="cylinder" rgba="1 0.3 0.3 1"/>
+    </body>
+    <body name="turtle" pos="0 0 0.36">
+      <joint name="root_free" type="free" limited="false" actuatorfrclimited="false"/>
+      <geom name="turtle_shell" size="0.9 0.5 0.36" type="box" rgba="0.2 0.5 0.2 1"/>
+      <site name="shell_center" pos="0 0 0.08" size="0.01"/>
+      <site name="ray_-80" pos="0.9 0 -0.18" quat="0.707085 0.696385 0.122797 0" size="0.001"/>
+      <site name="ray_-72" pos="0.9 0 -0.18" quat="0.707104 0.672504 0.218501 0" size="0.001"/>
+      <site name="ray_-64" pos="0.9 0 -0.18" quat="0.707117 0.635516 0.310008 0" size="0.001"/>
+      <site name="ray_-56" pos="0.9 0 -0.18" quat="0.707113 0.586211 0.395408 0" size="0.001"/>
+      <site name="ray_-48" pos="0.9 0 -0.18" quat="0.707113 0.525509 0.473108 0" size="0.001"/>
+      <site name="ray_-40" pos="0.9 0 -0.18" quat="0.7071 0.4545 0.5417 0" size="0.001"/>
+      <site name="ray_-32" pos="0.9 0 -0.18" quat="0.707089 0.374694 0.599691 0" size="0.001"/>
+      <site name="ray_-24" pos="0.9 0 -0.18" quat="0.707093 0.287597 0.645993 0" size="0.001"/>
+      <site name="ray_-16" pos="0.9 0 -0.18" quat="0.707111 0.194903 0.679711 0" size="0.001"/>
+      <site name="ray_-8" pos="0.9 0 -0.18" quat="0.707117 0.0984023 0.700216 0" size="0.001"/>
+      <site name="ray_+0" pos="0.9 0 -0.18" quat="0.707107 0 0.707107 0" size="0.001"/>
+      <site name="ray_+8" pos="0.9 0 -0.18" quat="0.707117 -0.0984023 0.700216 0" size="0.001"/>
+      <site name="ray_+16" pos="0.9 0 -0.18" quat="0.707111 -0.194903 0.679711 0" size="0.001"/>
+      <site name="ray_+24" pos="0.9 0 -0.18" quat="0.707093 -0.287597 0.645993 0" size="0.001"/>
+      <site name="ray_+32" pos="0.9 0 -0.18" quat="0.707089 -0.374694 0.599691 0" size="0.001"/>
+      <site name="ray_+40" pos="0.9 0 -0.18" quat="0.7071 -0.4545 0.5417 0" size="0.001"/>
+      <site name="ray_+48" pos="0.9 0 -0.18" quat="0.707113 -0.525509 0.473108 0" size="0.001"/>
+      <site name="ray_+56" pos="0.9 0 -0.18" quat="0.707113 -0.586211 0.395408 0" size="0.001"/>
+      <site name="ray_+64" pos="0.9 0 -0.18" quat="0.707117 -0.635516 0.310008 0" size="0.001"/>
+      <site name="ray_+72" pos="0.9 0 -0.18" quat="0.707104 -0.672504 0.218501 0" size="0.001"/>
+      <site name="ray_+80" pos="0.9 0 -0.18" quat="0.707085 -0.696385 0.122797 0" size="0.001"/>
+      <camera name="topdown" pos="0 0 20" quat="0.707107 0 0 -0.707107"/>
+      <body name="flipper_L_upper" pos="0.8 0.7 0.2">
+        <joint name="shoulder_L" pos="0 0 0" axis="0 0 1" range="0 2.96706"/>
+        <geom name="flipper_L_upper_geom" size="0.15 0.3" pos="0.3 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.2 0.4 0.7 1"/>
+        <body name="flipper_L_fore" pos="0.8 0 0">
+          <joint name="elbow_L" pos="0 0 0" axis="0 0 1" range="0 1.39626"/>
+          <geom name="flipper_L_fore_geom" size="0.15 0.3" pos="0.3 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.2 0.4 0.8 1"/>
+        </body>
+      </body>
+      <body name="flipper_R_upper" pos="0.8 -0.7 0.2">
+        <joint name="shoulder_R" pos="0 0 0" axis="0 0 -1" range="0 2.96706"/>
+        <geom name="flipper_R_upper_geom" size="0.15 0.3" pos="0.3 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.2 0.4 0.7 1"/>
+        <body name="flipper_R_fore" pos="0.8 0 0">
+          <joint name="elbow_R" pos="0 0 0" axis="0 0 -1" range="0 1.39626"/>
+          <geom name="flipper_R_fore_geom" size="0.15 0.3" pos="0.3 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.2 0.4 0.8 1"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="motor_shoulder_L" joint="shoulder_L" ctrllimited="true" ctrlrange="-1 1" gear="400 0 0 0 0 0"/>
+    <general name="motor_elbow_L" joint="elbow_L" ctrllimited="true" ctrlrange="-1 1" gear="400 0 0 0 0 0"/>
+    <general name="motor_shoulder_R" joint="shoulder_R" ctrllimited="true" ctrlrange="-1 1" gear="400 0 0 0 0 0"/>
+    <general name="motor_elbow_R" joint="elbow_R" ctrllimited="true" ctrlrange="-1 1" gear="400 0 0 0 0 0"/>
+  </actuator>
+
+  <sensor>
+    <accelerometer site="shell_center"/>
+    <gyro site="shell_center"/>
+    <rangefinder site="ray_-80" name="rf_-80"/>
+    <rangefinder site="ray_-72" name="rf_-72"/>
+    <rangefinder site="ray_-64" name="rf_-64"/>
+    <rangefinder site="ray_-56" name="rf_-56"/>
+    <rangefinder site="ray_-48" name="rf_-48"/>
+    <rangefinder site="ray_-40" name="rf_-40"/>
+    <rangefinder site="ray_-32" name="rf_-32"/>
+    <rangefinder site="ray_-24" name="rf_-24"/>
+    <rangefinder site="ray_-16" name="rf_-16"/>
+    <rangefinder site="ray_-8" name="rf_-8"/>
+    <rangefinder site="ray_+0" name="rf_+0"/>
+    <rangefinder site="ray_+8" name="rf_+8"/>
+    <rangefinder site="ray_+16" name="rf_+16"/>
+    <rangefinder site="ray_+24" name="rf_+24"/>
+    <rangefinder site="ray_+32" name="rf_+32"/>
+    <rangefinder site="ray_+40" name="rf_+40"/>
+    <rangefinder site="ray_+48" name="rf_+48"/>
+    <rangefinder site="ray_+56" name="rf_+56"/>
+    <rangefinder site="ray_+64" name="rf_+64"/>
+    <rangefinder site="ray_+72" name="rf_+72"/>
+    <rangefinder site="ray_+80" name="rf_+80"/>
+  </sensor>
+
+  <keyframe>
+    <key name="tucked" time="1.454" qpos="0.998676 0 28.1197 0 0.0243554 0 0.999703 2.79642 -5.7604e-07 2.79642 -5.7604e-07" qvel="-0.00152024 0 11.8301 0 -0.0569859 0 -0.0053 -9.02078e-07 -0.0053 -9.02078e-07"/>
+  </keyframe>
+</mujoco>

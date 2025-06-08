@@ -5,7 +5,7 @@
 
   
   <default>
-    <geom friction="0 10000 0" />
+    <geom friction="0 0 0" />
   </default>
 
   <worldbody>
@@ -13,7 +13,7 @@
     <light name="sun" pos="0 0 5" dir="0 0 -1" diffuse="1 1 1" specular="0.1 0.1 0.1" directional="true" cutoff="100" />
 
     
-    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.5" rgba="0.5 0.5 1 0.6" />    
+    <geom name="ground" type="plane" pos="0 0 0" size="100 100 0.5" rgba="0.2 0.25 0.3 1" />    
 
     
     
