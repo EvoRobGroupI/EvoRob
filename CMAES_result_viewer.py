@@ -97,6 +97,7 @@ def generate_ea_video(controller, video_name="Turtle_EA.mp4"):
     max_steps = 500
     for step in range(max_steps):
         action = controller.get_action(obs)
+        # mod_action = [action[0], action[1], action[0], action[1]]
         obs, reward, terminated, truncated, _ = env.step(action)
         frame = env.render()
         frames.append(frame)
@@ -110,7 +111,7 @@ def generate_ea_video(controller, video_name="Turtle_EA.mp4"):
 # Main: Select generation, load individual, and make video
 # ----------------------------------------------------------------------
 def main():
-    gen = 35  # <<==== CHANGE THIS to the generation you want
+    gen = 6  # <<==== CHANGE THIS to the generation you want
     results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
     best_ind = np.load(os.path.join(results_dir, f"{gen}", "x_best.npy"))
     world = TurtleWorld()

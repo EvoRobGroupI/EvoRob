@@ -74,9 +74,8 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         # rf_val = self.data.sensordata[rf_idx]               # This is a float (distance in meters)
         # obs = np.concatenate([obs, [rf_val]])
 
-        yaw = self._get_yaw()
-
-        obs = np.concatenate([obs, [yaw]])
+        # yaw = self._get_yaw()
+        # obs = np.concatenate([obs, [yaw]])
 
         return obs
     
@@ -243,21 +242,26 @@ class TurtleWorld(World):
         # action_sample = self.controller.get_action(obs)
         # print("  [DEBUG] initial action:", action_sample)
         steps_taken = 0
+        max_distance = 0
 
         total_reward = 0.0
         for _ in range(max_steps):
+            # print("obs0: ", obs[0])
+            # print("max dist: ", max_distance)
+            if obs[0] > max_distance: max_distance = obs[0]
             action = self.controller.get_action(obs)
-            print(action)
+            # mod_action = [action[0], action[1], action[0], action[1]]
             obs, reward, done, _ = self.step(action)
             total_reward += reward
             steps_taken += 1
             if done:
                 break
-
+        
+        # print("Final distance: ", max_distance)
         # print(f"[DEBUG] genotype rollout finished: steps_taken = {steps_taken}/{max_steps}")
     
 
-        return total_reward
+        return total_reward, max_distance
 
 
 # -----------------------------------------------------------------------------
@@ -267,18 +271,12 @@ def run_EA(ea, world):
     for gen in range(ea.n_gen):
         population = ea.ask()
         fitnesses = np.empty(ea.n_pop)
+        max_distance = 0
         for i, indiv in enumerate(population):
-            fitnesses[i] = world.evaluate_individual(indiv)
+            fitnesses[i], m_distance = world.evaluate_individual(indiv)
+            if m_distance > max_distance: max_distance = m_distance
+        print(f"gen: {gen} max dist: ", max_distance)
         ea.tell(population, fitnesses)
-    
-    # Print summary before telling EA
-        # best_idx = np.argmax(fitnesses)
-        # worst_idx = np.argmin(fitnesses)
-        # print(
-        #     f"[EA gen {gen}] "
-        #     f"best fitness = {fitnesses[best_idx]:.2f}, "
-        #     f"worst fitness = {fitnesses[worst_idx]:.2f}"
-        # )
 
 
 # -----------------------------------------------------------------------------
@@ -292,6 +290,7 @@ def generate_ea_video(controller, video_name: str = "Turtle_EA.mp4"):
 
     for _ in range(max_steps):
         action = controller.get_action(obs)
+        # mod_action = [action[0], action[1], action[0], action[1]]
         obs, reward, terminated, truncated, _ = env.step(action)
         frame = env.render()
         frames.append(frame)
@@ -328,7 +327,7 @@ def generate_ppo_video(model, video_name: str = "Turtle_PPO.mp4"):
 # -----------------------------------------------------------------------------
 def main():
     # Choose algorithm: "CMAES" or "PPO"
-    algorithm = "EA"  # <-- change this to "PPO" to use PPO instead of CMAES
+    algorithm = "PPO"  # <-- change this to "PPO" to use PPO instead of CMAES
 
     world = TurtleWorld()
 

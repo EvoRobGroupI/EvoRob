@@ -115,11 +115,11 @@ act_ids = [
 t0 = time.time()
 while viewer.is_alive:
     if act_ids:
-        φ = 2 * math.pi * 0.6 * (time.time() - t0)  # 0.6 Hz oscillation
+        φ = 2 * math.pi * 0.4 * (time.time() - t0)  # 0.6 Hz oscillation
         data.ctrl[act_ids] = [
-            0.9 * math.sin(φ),
+            math.sin(φ),
             0.0,
-            0.9 * math.sin(φ),
+            math.sin(φ),
             0.0,
         ]
     mujoco.mj_step(model, data)

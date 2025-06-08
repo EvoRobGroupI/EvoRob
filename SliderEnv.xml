@@ -5,7 +5,7 @@
 
   <!-- Zero friction for every geom -->
   <default>
-    <geom friction="0.5 0.5 0.5"/>
+    <geom friction="0.03 0.03 0.03"/>
   </default>
 
   <worldbody>
