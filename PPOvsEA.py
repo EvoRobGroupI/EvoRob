@@ -62,8 +62,8 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         # for i, name in enumerate(self.model.body_names):
         #     print(f"body index {i:2d}: {name}") 
 
-        print(self.data.body("turtle").id)
-        self.once = True
+        # print(self.data.body("turtle").id)
+        # self.once = True
         utils.EzPickle.__init__(self)
 
     def _get_obs(self):
@@ -103,10 +103,41 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         yaw_deg = np.degrees(yaw_rad)
         return yaw_deg
 
+    # def step(self, action):
+
+    #     old_qpos = self.data.qpos.copy()
+    #     old_qvel = self.data.qvel.copy()
+
+    #     self.do_simulation(action, self.frame_skip)
+    #     obs = self._get_obs()
+
+    #     x_pos = self.data.qpos[0]
+    #     y_pos = self.data.qpos[1]
+    #     x_vel = self.data.qvel[0]
+        
+    #     yaw_rate = self.data.qvel[5]   # its within 5, max 3 really
+    #     yaw = self._get_yaw()
+
+
+    #     # reward = x_vel + x_pos
+    #     terminated = (x_pos < -1) or (abs(y_pos) > 3.0)
+
+    #     direction_adj = 1 - 2*(abs(yaw)+0.01)/90
+    #     reward = x_vel*direction_adj + 2*x_pos
+
+    #     truncated = False
+    #     info = {
+    #         "x_pos": x_pos,
+    #         "y_pos": y_pos,
+    #         "x_vel": x_vel
+    #     }
+    #     return obs, reward, terminated, truncated, info
+    
     def step(self, action):
 
-        old_qpos = self.data.qpos.copy()
-        old_qvel = self.data.qvel.copy()
+        # # Before simulating, record the “old” state
+        # old_qpos = self.data.qpos.copy()
+        # old_qvel = self.data.qvel.copy()
 
         self.do_simulation(action, self.frame_skip)
         obs = self._get_obs()
@@ -114,16 +145,29 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
         x_pos = self.data.qpos[0]
         y_pos = self.data.qpos[1]
         x_vel = self.data.qvel[0]
-        
-        yaw_rate = self.data.qvel[5]   # its within 5, max 3 really
+
         yaw = self._get_yaw()
 
-
-        # reward = x_vel + x_pos
         terminated = (x_pos < -1) or (abs(y_pos) > 3.0)
 
+        milestone = int(x_pos*2 // 1)
+        if milestone > getattr(self, "_last_ms", -1):
+            self._last_ms = milestone
+            r_milestone = 1.0
+        else:
+            r_milestone = 0.0
         direction_adj = 1 - 2*(abs(yaw)+0.01)/90
-        reward = x_vel*direction_adj + x_pos
+
+        v_thresh = 0.02      # ≈ 1 cm/s
+        k_still  = 0.5       # penalty magnitude
+
+        # … after you’ve got x_vel …
+        if abs(x_vel) < v_thresh:
+            r_still = -k_still
+        else:
+            r_still = 0.0
+
+        reward = 0.8*np.max(x_vel,0)*np.cos(np.radians(yaw)) + 1.4*r_milestone - 0.5*abs(y_pos) + r_still 
 
         truncated = False
         info = {
@@ -131,6 +175,7 @@ class TurtleGymEnv(MujocoEnv, utils.EzPickle):
             "y_pos": y_pos,
             "x_vel": x_vel
         }
+
         return obs, reward, terminated, truncated, info
     
     # def step(self, action):
@@ -234,23 +279,45 @@ class TurtleWorld(World):
 # -----------------------------------------------------------------------------
 # EA runner (unchanged)
 # -----------------------------------------------------------------------------
-def run_EA(ea, world):
-    for gen in range(ea.n_gen):
-        population = ea.ask()
-        fitnesses = np.empty(ea.n_pop)
-        for i, indiv in enumerate(population):
-            fitnesses[i] = world.evaluate_individual(indiv)
-        ea.tell(population, fitnesses)
+# def run_EA(ea, world):
+#     for gen in range(ea.n_gen):
+#         population = ea.ask()
+#         fitnesses = np.empty(ea.n_pop)
+#         for i, indiv in enumerate(population):
+#             fitnesses[i] = world.evaluate_individual(indiv)
+#         ea.tell(population, fitnesses)
     
-    # Print summary before telling EA
-        # best_idx = np.argmax(fitnesses)
-        # worst_idx = np.argmin(fitnesses)
-        # print(
-        #     f"[EA gen {gen}] "
-        #     f"best fitness = {fitnesses[best_idx]:.2f}, "
-        #     f"worst fitness = {fitnesses[worst_idx]:.2f}"
+#     # Print summary before telling EA
+#         # best_idx = np.argmax(fitnesses)
+#         # worst_idx = np.argmin(fitnesses)
+#         # print(
+#         #     f"[EA gen {gen}] "
+#         #     f"best fitness = {fitnesses[best_idx]:.2f}, "
+#         #     f"worst fitness = {fitnesses[worst_idx]:.2f}"
         # )
 
+from joblib import Parallel, delayed             # (pip install joblib)
+import multiprocessing as mp
+
+def run_EA(ea: CMAES, world: TurtleWorld):
+    n_jobs = mp.cpu_count()          # or set e.g. 8, 32, …
+
+    # -- one helper so that *each* process instantiates its own env --------
+    def evaluate_in_subprocess(genotype: np.ndarray):
+        # Re-create a fresh TurtleWorld *inside* the subprocess
+        local_world = TurtleWorld()           # <= 2-3 ms, cheap
+        return local_world.evaluate_individual(genotype)
+
+    # -- evolutionary loop -------------------------------------------------
+    for gen in range(ea.n_gen):
+        population  = ea.ask()
+
+        fitnesses   = Parallel(n_jobs=n_jobs, backend="loky")(
+            delayed(evaluate_in_subprocess)(ind) for ind in population
+        )
+        fitnesses   = np.asarray(fitnesses, dtype=np.float64)
+
+        ea.tell(population, fitnesses)
 
 # -----------------------------------------------------------------------------
 # Video generation for EA-trained controller (unchanged)
@@ -310,11 +377,15 @@ def main():
         n_parameters = world.n_params
         CMAES_opts["min"] = -1
         CMAES_opts["max"] = 1
-        CMAES_opts["num_parents"] = 50
-        CMAES_opts["num_generations"] = 2
-        CMAES_opts["mutation_sigma"] = 0.5
+        CMAES_opts["num_parents"] = 30
+        # CMAES_opts["num_generations"] = 150
+        # CMAES_opts["mutation_sigma"] = 0.5
+        CMAES_opts["num_generations"] = 150
+        CMAES_opts["mutation_sigma"]  = 0.5        # start twice as large
+        CMAES_opts["sigma_restart"]   = 0.3        # grow back if stuck
+        CMAES_opts["tolx"]            = 1e-12      # disable premature stop
 
-        population_size = 100
+        population_size = 150
         results_dir = os.path.join(get_project_root(), "results", "TurtleWorld", "CMAES")
         # os.makedirs(results_dir, exist_ok=True)
         if os.path.isdir(results_dir):

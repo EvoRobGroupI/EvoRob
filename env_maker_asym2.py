@@ -10,7 +10,7 @@ import mujoco, mujoco_viewer
 slider_tree = ET.parse("SliderEnv.xml")
 slider_root = slider_tree.getroot()
 worldbody   = slider_root.find("worldbody") or ET.SubElement(slider_root,"worldbody")
-jitter = 0
+jitter = 0.4
 
 for g in list(worldbody.findall("geom")):
     if "pole" in g.get("name", ""):
